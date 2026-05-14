@@ -134,16 +134,33 @@ a:hover {
 }
 
 select {
-    appearance: none; /* Removes the ugly default arrow */
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    color: white;
-    padding: 12px 20px;
+    background: linear-gradient 135deg, rgba(20, 20, 20, 0.9), rgba(60, 60, 60, 0.9, rgba(20, 20, 20, 0.9));
+    background-size: 200% 200%;
+    animation: sparkle 4s linear infinite; /* Uses the sparkle animation we created */
+    color: #ffffff; /* Crisp white text */
+    font-size: 18px; /* Larger text as requested */
     font-weight: bold;
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    appearance: none; /* Removes the default ugly arrow */
     text-align: center;
+    width: 100%;
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+select option {
+    background-color: #1a1a1a; /* Darker background for the list */
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #ff9a9e; /* Pink neon glow when clicking */
+    box-shadow: 0 0 20px rgba(255, 154, 158, 0.6);
 }
 
 select:hover {
