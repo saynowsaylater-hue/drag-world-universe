@@ -3288,3 +3288,19 @@ function teamsScreen() {
     totalCastSize = currentCast.length;
     screen.createButton("Proceed", "miniChallenge()");
 }
+
+function changeCastMember(elementId, newName) {
+    const card = document.getElementById(elementId);
+    
+    // Start the kick!
+    card.classList.add('kicked');
+    
+    // Wait for the kick to finish (0.6s) then reset
+    setTimeout(() => {
+        card.innerText = newName; // Change the name
+        card.classList.remove('kicked');
+        
+        // Optional: Add a "poof" or "entrance" effect here
+        card.style.opacity = "1";
+    }, 600);
+}
