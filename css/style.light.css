@@ -134,25 +134,25 @@ a:hover {
 }
 
 select {
-    background: linear-gradient 135deg, rgba(20, 20, 20, 0.9), rgba(60, 60, 60, 0.9, rgba(20, 20, 20, 0.9));
+    /* Darker background to make text and sparkles pop */
+    background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
     background-size: 200% 200%;
-    animation: sparkle 4s linear infinite; /* Uses the sparkle animation we created */
-    color: #ffffff; /* Crisp white text */
-    font-size: 18px; /* Larger text as requested */
+    animation: sparkle 3s linear infinite;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px; 
+    color: #ffffff;
+    font-size: 18px;
     font-weight: bold;
-    padding: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    appearance: none; /* Removes the default ugly arrow */
+    padding: 12px 25px;
+    appearance: none;
     text-align: center;
-    width: 100%;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
-
 select option {
     background-color: #1a1a1a; /* Darker background for the list */
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     padding: 10px;
 }
@@ -164,8 +164,9 @@ select:focus {
 }
 
 select:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: #ff9a9e;
+    border-color: #ff9a9e; /* Neon pink sparkle border on hover */
+    box-shadow: 0 0 20px rgba(255, 154, 158, 0.4);
+    transform: scale(1.02);
 }
 
 @keyframes sparkle {
@@ -198,4 +199,11 @@ button, .bubble-container {
 
 body {
     cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto !important;
+}
+
+p, label, .text-label {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 1.1rem;
+    font-weight: 600;
 }
