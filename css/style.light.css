@@ -23,17 +23,18 @@ body {
     text-transform: uppercase;
     letter-spacing: 3px;
     border-bottom: 3px solid #ff9a9e; /* Pink neon accent line */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-#MainBlock {
-    background-color: rgba(255, 255, 255, 0.25);
-    margin-left: 100px;
-    margin-right: 100px;
+.container, #MainBlock {
+    background: rgba(255, 255, 255, 0.05); /* Much lighter so they don't stack and look dirty */
+    backdrop-filter: blur(15px);
     border-radius: 30px;
-     backdrop-filter: blur(8px);
-    border: 3px solid black;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.322);
+    padding: 20px;
+    margin: 10px auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    width: 90%;
 }
 
 h2 {
@@ -94,7 +95,7 @@ button {
 }
 
 button:hover {
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px) scale(1.05);
     filter: brightness(1.1);
 }
@@ -111,15 +112,16 @@ button:hover {
     color: white;
 
 a {
-    text-decoration: none;
-    color: #ffd700;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    text-decoration: none !important; /* Removes the ugly line */
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
 }
 
 a:hover {
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    color: #ff9a9e; /* Pink glow on hover */
+    text-shadow: 0 0 15px #ff9a9e;
 }
 
 select {
