@@ -60,10 +60,6 @@ big {
     color: #3A5874;
 }
 
-select {
-    margin-top: 5px;
-}
-
 button {
     margin-top: 5px;
 }
@@ -82,9 +78,60 @@ input, button, select {
 }
 
 button {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px; /* Clean rounded edges */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
     margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    transform: translateY(-2px) scale(1.05);
+    filter: brightness(1.1);
 }
 
 #inblock {
-    color: #4d759e;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+a {
+    text-decoration: none;
+    color: #ffd700;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+select {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
 }
