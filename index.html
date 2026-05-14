@@ -102,3 +102,33 @@
 <script src="javascript/index.js"></script>
 
 </html>
+
+<script>
+document.querySelectorAll('select').forEach(select => {
+    select.addEventListener('change', function(e) {
+        const rect = this.getBoundingClientRect();
+        for(let i = 0; i < 15; i++) { // Creates 15 sparkles
+            createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
+    });
+});
+
+function createSparkle(x, y) {
+    const particle = document.createElement('div');
+    particle.className = 'sparkle-particle';
+    
+    // Random direction for each sparkle
+    const moveX = (Math.random() - 0.5) * 200 + 'px';
+    const moveY = (Math.random() - 0.5) * 200 + 'px';
+    
+    particle.style.setProperty('--x', moveX);
+    particle.style.setProperty('--y', moveY);
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    
+    document.body.appendChild(particle);
+    
+    // Clean up after animation
+    setTimeout(() => particle.remove(), 800);
+}
+</script>
