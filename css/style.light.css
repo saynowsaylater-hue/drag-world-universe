@@ -150,3 +150,35 @@ select:hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: #ff9a9e;
 }
+
+@keyframes sparkle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px #fff, 0 0 10px #ff9a9e; }
+    50% { box-shadow: 0 0 20px #fff, 0 0 30px #ff9a9e; }
+    100% { box-shadow: 0 0 5px #fff, 0 0 10px #ff9a9e; }
+}
+
+button, .bubble-container {
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffffff, #a1887f);
+    background-size: 400% 400%;
+    animation: sparkle 3s ease infinite; /* This makes it shimmer! */
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+#MainBlock {
+    border: 3px solid transparent;
+    border-image: linear-gradient(to bottom right, #ff9a9e, #ffffff, #fad0c4);
+    border-image-slice: 1;
+    animation: glow 2s ease-in-out infinite; /* Makes the whole block pulse with light */
+}
+
+body {
+    cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto !important;
+}
