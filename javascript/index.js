@@ -3299,7 +3299,7 @@ function changeCastMember(elementId, newName) {
     setTimeout(() => {
         card.innerText = newName; // Change the name
         card.classList.remove('kicked');
-        
+        createSparkle(window.innerWidth / 2, window.innerHeight / 2);
         // Optional: Add a "poof" or "entrance" effect here
         card.style.opacity = "1";
     }, 600);
