@@ -3289,24 +3289,37 @@ function teamsScreen() {
     screen.createButton("Proceed", "miniChallenge()");
 }
 
-function changeCastMember(elementId, newName) {
-    const card = document.getElementById(elementId);
-    if (!card) return;
+function changeCastMember(index, newName) {
+    // 1. Find the container (the <p> tag that holds the image and name)
+    const selectBox = document.querySelectorAll('.queenList')[index];
+    const container = selectBox.parentElement;
 
-    // 1. Reset the animation so it can play again
-    card.classList.remove('kicked');
-    void card.offsetWidth; // This is MANDATORY to restart the animation
-    
-    // 2. Add the kick
-    card.classList.add('kicked');
+    if (!container) return;
 
-    // 3. Change the name while the card is "off-screen"
+    // --- THE BOOT KICK ---
+    container.style.transition = "transform 0.4s ease-in, opacity 0.3s";
+    container.style.transform = "translateX(800px) rotate(30deg)";
+    container.style.opacity = "0";
+
     setTimeout(() => {
-        card.innerText = newName;
+        // 2. Change the actual name/selection while it's off-screen
+        selectBox.value = newName;
         
-        // 4. Fire Sparkles
+        // Move it instantly to the left side
+        container.style.transition = "none";
+        container.style.transform = "translateX(-800px)";
+
+        // --- THE SPARKLES ---
         if (typeof createSparkle === "function") {
-            createSparkle(window.innerWidth / 2, window.innerHeight / 2);
+            const rect = container.getBoundingClientRect();
+            createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
         }
-    }, 300); // Happens right when the card is invisible
+
+        // 3. Slide it back in with the new queen
+        setTimeout(() => {
+            container.style.transition = "transform 0.5s ease-out, opacity 0.5s";
+            container.style.transform = "translateX(0) rotate(0deg)";
+            container.style.opacity = "1";
+        }, 50);
+    }, 400);
 }
