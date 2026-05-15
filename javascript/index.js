@@ -3291,41 +3291,30 @@ function teamsScreen() {
 }
 
 function changeCastMember(index, newName) {
-    // 1. Find the dropdown
     const selects = document.querySelectorAll('.queenList');
     const selectBox = selects[index];
-    
-    // 2. Find the container (the <p> tag that holds the image)
-    // Looking at your screenshot, we want the element containing the image
-    const container = document.getElementById("image" + index).parentElement;
+    const container = selectBox ? selectBox.parentElement : null;
 
     if (!container) return;
 
-    // 3. APPLY THE GOLDEN BOOT
-    container.classList.add('kicked');
+    // Apply the kick
+    container.style.transition = "transform 0.4s ease-in, opacity 0.3s";
+    container.style.transform = "translateX(1000px) rotate(30deg)";
+    container.style.opacity = "0";
 
     setTimeout(() => {
-        // 4. Change the Queen while she is off-screen
+        // Change name/value while hidden
         selectBox.value = newName;
-        const img = document.getElementById("image" + index);
-        if (img) img.src = image/queens/${newName}.webp;
-
-        // 5. Trigger Sparkles
-        if (typeof createSparkle === "function") {
-            const rect = container.getBoundingClientRect();
-            createSparkle(rect.left, rect.top);
-        }
-
-        // 6. Reset position instantly while invisible
+        
+        // Move instantly to the left
         container.style.transition = "none";
         container.style.transform = "translateX(-1000px)";
 
         setTimeout(() => {
-            // 7. Slide back in with the new queen
-            container.classList.remove('kicked');
-            container.style.transition = "transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s";
+            // Slide back in
+            container.style.transition = "transform 0.5s ease-out, opacity 0.5s";
             container.style.transform = "translateX(0) rotate(0deg)";
             container.style.opacity = "1";
         }, 50);
-    }, 400); // The kick takes 0.4 seconds
+    }, 400);
 }
