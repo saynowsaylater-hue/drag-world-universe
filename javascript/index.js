@@ -3296,33 +3296,28 @@ function changeCastMember(index, newName) {
 
     if (!container) return;
 
-    // 1. Reset and Force Animation
+    // 1. Kick it off screen
     container.style.display = "inline-block";
-    container.style.transition = "all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045)";
-    
-    // 2. THE KICK (Off-screen)
-    container.style.transform = "translateX(1000px) rotate(45deg)";
+    container.style.transition = "all 0.4s ease-in";
+    container.style.transform = "translateX(1000px) rotate(30deg)";
     container.style.opacity = "0";
 
     setTimeout(() => {
-        // 3. Change Name & Sparkle while invisible
+        // 2. Change the value while it's gone
         selectBox.value = newName;
         
-        // Also update the image if it exists
-        const img = container.querySelector('img');
-        if (img) { img.src = image/queens/${newName}.webp; }
-
+        // Sparkle!
         if (typeof createSparkle === "function") {
             createSparkle(window.innerWidth / 2, window.innerHeight / 2);
         }
 
-        // Snap to the left side instantly
+        // Snap to the left side
         container.style.transition = "none";
         container.style.transform = "translateX(-1000px)";
 
         setTimeout(() => {
-            // 4. Slide back into place
-            container.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            // 3. Slide back in
+            container.style.transition = "all 0.5s ease-out";
             container.style.transform = "translateX(0) rotate(0deg)";
             container.style.opacity = "1";
         }, 50);
