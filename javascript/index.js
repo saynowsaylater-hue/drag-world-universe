@@ -3292,7 +3292,7 @@ function teamsScreen() {
 function changeCastMember(index, newName) {
     const selects = document.querySelectorAll('.queenList');
     const selectBox = selects[index];
-    const container = selectBox ? selectBox.parentElement : null;
+    const container = selectBox ? selectBox.closest('p') : null;
 
     if (!container) return;
 

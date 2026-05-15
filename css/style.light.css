@@ -251,3 +251,9 @@ p, label, .text-label {
     51% { transform: translateX(-600px); opacity: 0; } /* Move to the other side instantly */
     100% { transform: translateX(0); opacity: 1; } /* Slide back in with the new name */
 }
+
+#castSelection p {
+    display: inline-block !important;
+    position: relative;
+    transition: transform 0.5s ease, opacity 0.5s;
+}
