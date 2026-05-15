@@ -3294,35 +3294,37 @@ function changeCastMember(index, newName) {
     const selectBox = selects[index];
     const container = selectBox ? selectBox.parentElement : null;
 
-    if (!container) {
-        alert("Wait, I can't find the character at index " + index);
-        return;
-    }
+    if (!container) return;
 
-    // 1. Force the container to be animatable
+    // 1. Reset and Force Animation
     container.style.display = "inline-block";
-    container.style.transition = "all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045)";
+    container.style.transition = "all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045)";
     
-    // 2. THE KICK
+    // 2. THE KICK (Off-screen)
     container.style.transform = "translateX(1000px) rotate(45deg)";
     container.style.opacity = "0";
 
     setTimeout(() => {
-        // 3. Change Name & Sparkle
+        // 3. Change Name & Sparkle while invisible
         selectBox.value = newName;
+        
+        // Also update the image if it exists
+        const img = container.querySelector('img');
+        if (img) { img.src = image/queens/${newName}.webp; }
+
         if (typeof createSparkle === "function") {
             createSparkle(window.innerWidth / 2, window.innerHeight / 2);
         }
 
-        // Snap to left
+        // Snap to the left side instantly
         container.style.transition = "none";
         container.style.transform = "translateX(-1000px)";
 
         setTimeout(() => {
-            // 4. Slide back in
+            // 4. Slide back into place
             container.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
             container.style.transform = "translateX(0) rotate(0deg)";
             container.style.opacity = "1";
         }, 50);
-    }, 500);
+    }, 400);
 }
