@@ -3262,6 +3262,7 @@ class Team extends Queen {
         this.QueenB = QueenB;
     }
 }
+
 function teamsScreen() {
     let screen = new Scene();
     screen.clean();
@@ -3290,21 +3291,41 @@ function teamsScreen() {
 }
 
 function changeCastMember(index, newName) {
-    const selectBox = document.querySelectorAll('.queenList')[index];
-    const container = selectBox.parentElement; // This grabs the <p> tag
+    // 1. Find the dropdown
+    const selects = document.querySelectorAll('.queenList');
+    const selectBox = selects[index];
+    
+    // 2. Find the container (the <p> tag that holds the image)
+    // Looking at your screenshot, we want the element containing the image
+    const container = document.getElementById("image" + index).parentElement;
 
     if (!container) return;
 
-    // Trigger the kick on the whole container
+    // 3. APPLY THE GOLDEN BOOT
     container.classList.add('kicked');
 
     setTimeout(() => {
-        selectBox.value = newName; // Change name
-        container.classList.remove('kicked');
-        
-        // Trigger Sparkle
+        // 4. Change the Queen while she is off-screen
+        selectBox.value = newName;
+        const img = document.getElementById("image" + index);
+        if (img) img.src = image/queens/${newName}.webp;
+
+        // 5. Trigger Sparkles
         if (typeof createSparkle === "function") {
-            createSparkle(window.innerWidth / 2, window.innerHeight / 2);
+            const rect = container.getBoundingClientRect();
+            createSparkle(rect.left, rect.top);
         }
-    }, 600);
+
+        // 6. Reset position instantly while invisible
+        container.style.transition = "none";
+        container.style.transform = "translateX(-1000px)";
+
+        setTimeout(() => {
+            // 7. Slide back in with the new queen
+            container.classList.remove('kicked');
+            container.style.transition = "transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s";
+            container.style.transform = "translateX(0) rotate(0deg)";
+            container.style.opacity = "1";
+        }, 50);
+    }, 400); // The kick takes 0.4 seconds
 }
