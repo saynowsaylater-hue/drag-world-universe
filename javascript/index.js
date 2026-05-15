@@ -3290,36 +3290,21 @@ function teamsScreen() {
 }
 
 function changeCastMember(index, newName) {
-    const selects = document.querySelectorAll('.queenList');
-    const selectBox = selects[index];
-    const container = selectBox ? selectBox.closest('p') : null;
+    const selectBox = document.querySelectorAll('.queenList')[index];
+    const container = selectBox.parentElement; // This grabs the <p> tag
 
     if (!container) return;
 
-    // 1. Kick it off screen
-    container.style.display = "inline-block";
-    container.style.transition = "all 0.4s ease-in";
-    container.style.transform = "translateX(1000px) rotate(30deg)";
-    container.style.opacity = "0";
+    // Trigger the kick on the whole container
+    container.classList.add('kicked');
 
     setTimeout(() => {
-        // 2. Change the value while it's gone
-        selectBox.value = newName;
+        selectBox.value = newName; // Change name
+        container.classList.remove('kicked');
         
-        // Sparkle!
+        // Trigger Sparkle
         if (typeof createSparkle === "function") {
             createSparkle(window.innerWidth / 2, window.innerHeight / 2);
         }
-
-        // Snap to the left side
-        container.style.transition = "none";
-        container.style.transform = "translateX(-1000px)";
-
-        setTimeout(() => {
-            // 3. Slide back in
-            container.style.transition = "all 0.5s ease-out";
-            container.style.transform = "translateX(0) rotate(0deg)";
-            container.style.opacity = "1";
-        }, 50);
-    }, 400);
+    }, 600);
 }
