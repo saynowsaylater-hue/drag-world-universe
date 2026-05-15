@@ -3291,29 +3291,22 @@ function teamsScreen() {
 
 function changeCastMember(elementId, newName) {
     const card = document.getElementById(elementId);
-    
-    if (!card) {
-        console.error("ERROR: Could not find an element with ID:", elementId);
-        return;
-    }
+    if (!card) return;
 
-    console.log("Kicking character:", elementId);
-
-    // 1. Force the 'kicked' animation
+    // 1. Reset the animation so it can play again
     card.classList.remove('kicked');
-    void card.offsetWidth; // This is the "Magic" line that resets the animation
+    void card.offsetWidth; // This is MANDATORY to restart the animation
+    
+    // 2. Add the kick
     card.classList.add('kicked');
 
-    // 2. Wait for the 'swing' to happen before changing the text
+    // 3. Change the name while the card is "off-screen"
     setTimeout(() => {
         card.innerText = newName;
-        console.log("Name changed to:", newName);
-
-        // 3. Trigger Sparkles
+        
+        // 4. Fire Sparkles
         if (typeof createSparkle === "function") {
             createSparkle(window.innerWidth / 2, window.innerHeight / 2);
-        } else {
-            console.warn("Sparkle function not found in index.html!");
         }
-    }, 300); // 0.3 seconds is the sweet spot for the "hit"
+    }, 300); // Happens right when the card is invisible
 }
