@@ -227,7 +227,8 @@ p, label, .text-label {
 @keyframes kicked-by-boot {
     0% { transform: translateX(0) rotate(0deg); opacity: 1; }
     20% { transform: translateX(-20px) rotate(-10deg); } /* Wind up */
-    40% { transform: translateX(100vw) rotate(45deg); opacity: 0; } /* The Kick! */
+    100% { transform: translateX(100vw) rotate(45deg); opacity: 0; } /* The Kick! */
+    100%  { transform: translateX(0); opacity: 1;}
 }
 
 .kicked {

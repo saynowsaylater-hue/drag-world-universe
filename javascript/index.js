@@ -3291,16 +3291,23 @@ function teamsScreen() {
 
 function changeCastMember(elementId, newName) {
     const card = document.getElementById(elementId);
+    if (!card) return;
+
+    // 1. Remove the class first to reset the "boot"
+    card.classList.remove('kicked');
     
-    // Start the kick!
+    // 2. Trigger a "reflow" (This is the secret trick to make it work)
+    void card.offsetWidth; 
+
+    // 3. Add the class back to start the kick
     card.classList.add('kicked');
-    
-    // Wait for the kick to finish (0.6s) then reset
+
+    // 4. Update the name and spark up exactly at the 0.4s mark
     setTimeout(() => {
-        card.innerText = newName; // Change the name
-        card.classList.remove('kicked');
-        createSparkle(window.innerWidth / 2, window.innerHeight / 2);
-        // Optional: Add a "poof" or "entrance" effect here
-        card.style.opacity = "1";
-    }, 600);
+        card.innerText = newName;
+        // Make sure this function matches your index.html exactly
+        if (typeof createSparkle === "function") {
+            createSparkle(window.innerWidth / 2, window.innerHeight / 2);
+        }
+    }, 400); 
 }
