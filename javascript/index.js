@@ -3290,36 +3290,39 @@ function teamsScreen() {
 }
 
 function changeCastMember(index, newName) {
-    // 1. Find the container (the <p> tag that holds the image and name)
-    const selectBox = document.querySelectorAll('.queenList')[index];
-    const container = selectBox.parentElement;
+    const selects = document.querySelectorAll('.queenList');
+    const selectBox = selects[index];
+    const container = selectBox ? selectBox.parentElement : null;
 
-    if (!container) return;
+    if (!container) {
+        alert("Wait, I can't find the character at index " + index);
+        return;
+    }
 
-    // --- THE BOOT KICK ---
-    container.style.transition = "transform 0.4s ease-in, opacity 0.3s";
-    container.style.transform = "translateX(800px) rotate(30deg)";
+    // 1. Force the container to be animatable
+    container.style.display = "inline-block";
+    container.style.transition = "all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045)";
+    
+    // 2. THE KICK
+    container.style.transform = "translateX(1000px) rotate(45deg)";
     container.style.opacity = "0";
 
     setTimeout(() => {
-        // 2. Change the actual name/selection while it's off-screen
+        // 3. Change Name & Sparkle
         selectBox.value = newName;
-        
-        // Move it instantly to the left side
-        container.style.transition = "none";
-        container.style.transform = "translateX(-800px)";
-
-        // --- THE SPARKLES ---
         if (typeof createSparkle === "function") {
-            const rect = container.getBoundingClientRect();
-            createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+            createSparkle(window.innerWidth / 2, window.innerHeight / 2);
         }
 
-        // 3. Slide it back in with the new queen
+        // Snap to left
+        container.style.transition = "none";
+        container.style.transform = "translateX(-1000px)";
+
         setTimeout(() => {
-            container.style.transition = "transform 0.5s ease-out, opacity 0.5s";
+            // 4. Slide back in
+            container.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
             container.style.transform = "translateX(0) rotate(0deg)";
             container.style.opacity = "1";
         }, 50);
-    }, 400);
+    }, 500);
 }
